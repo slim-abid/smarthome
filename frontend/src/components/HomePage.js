@@ -5,9 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
-
 import http from "./http-common";
-
 
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -19,7 +17,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
   contact:{
     position:'relative',
-    marginLeft:'1em',
+    marginLeft:'15em',
     backgroundColor: "#FFF",
     borderRadius:"20px",
     border: "none",
@@ -28,10 +26,25 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     textDecoration: "none",
     display: "inline-block",
-    fontSize: "16px",
-    margin: "4px 2px",
+    fontSize: "12px",
+    margin: "14px 22px",
     cursor: "pointer",
       },
+      contact2:{
+        position:'relative',
+        marginLeft:'20em',
+        backgroundColor: "#FFF",
+        borderRadius:"20px",
+        border: "none",
+        color: "#372279",
+        padding: "5px 25px",
+        textAlign: "center",
+        textDecoration: "none",
+        display: "inline-block",
+        fontSize: "12px",
+        margin: "14px 22px",
+        cursor: "pointer",
+          },
   appBarStyle:{
     backgroundColor:"#372279",
     alignItems: 'flex-start',
@@ -42,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 
    loginButton:{
      width:200,
-     
+     height:50,
      fontSize:'1em',
      "&:hover": {
       backgroundColor: '#342177',
@@ -190,7 +203,7 @@ function Home() {
             </Typography>
             </div>
             <IconButton edge="end"><div className={classes.contact}>Contact Us</div></IconButton>
-            <IconButton edge="end"><div className={classes.contact}>Our Services</div></IconButton>
+            <IconButton edge="end"><div className={classes.contact2}>Our Services</div></IconButton>
             
                           
            
