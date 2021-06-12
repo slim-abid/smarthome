@@ -1,81 +1,105 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast , Slide} from 'react-toastify';
-import { FaTemperatureHigh as Ticon } from 'react-icons/fa';
-import { GiGasMask as Gicon } from 'react-icons/gi';
-import { ImBell as Bellicon } from 'react-icons/im';
-import { AiOutlineAlert as Mvticon } from 'react-icons/ai';
-import './BlockNotification.css';
-toast.configure(
-)
-function notification(){
-    /////////////////Temperature//////////
-    const TemperatureToastContainer = () => {
-        return(
-        <div className="Temperature-Toast-Container" >
-            <div><div>temperature alert</div></div>
-            <div><Ticon></Ticon></div>
-        </div>
-        )};
-    const TemperatureToast = () => {
-        toast(<TemperatureToastContainer></TemperatureToastContainer> , { position : toast.POSITION.TOP_RIGHT })
-      };
-      ////////////////////Gaz////////////////////
-    const GazToastContainer = () => {
-        return(
-        <div className="Gaz-Toast-Container" >
-            <div><div>Gaz alert</div></div>
-            <div><Gicon></Gicon></div>
-        </div>
-        )};
-    const GazToast = () => {
-        toast(<GazToastContainer></GazToastContainer>, { position : toast.POSITION.TOP_RIGHT })
-      };
-    ///////////////////////Bell//////////////////////////
-    const BellToastContainer = () => {
-        return(
-        <div className="Bell-Toast-Container" >
-            <div>
-                    <div>Bell alert</div>
-                    <Link to="/streaming">click here to get streaming video</Link>
-                    </div>
-            <div><Bellicon></Bellicon></div>
-        </div>
-        )};
-    const BellToast = () => {
-        toast(<BellToastContainer></BellToastContainer>, { position : toast.POSITION.TOP_RIGHT })
-      };
-    ///////////////////////mouvmetn//////////////////////////
-        const MvtToastContainer = () => {
-            return(
-            <div className="Mvt-Toast-Container" >
-                <div>
-                    <div>Mouvement alert</div>
-                    <Link to="/streaming">click here to get streaming video</Link>
-                </div>
-                
-                <div><Mvticon></Mvticon></div>
-            </div>
-            )};
-        const MvtToast = () => {
-            toast(<MvtToastContainer></MvtToastContainer>, { position : toast.POSITION.TOP_RIGHT })
-          };
-	return (
+import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
+import IconButton from '@material-ui/core/IconButton';
+import Collapse from '@material-ui/core/Collapse';
+import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
+export default function Notification() {
+  const [openT, setOpenT ] = React.useState(true);
+  const [openG, setOpenG ] = React.useState(true);
+  const [openB, setOpenB ] = React.useState(true);
+  const [openM, setOpenM ] = React.useState(true);
 
-        <div className="block_notifiaction">
-            <div>
-                <button onClick={TemperatureToast}>Temperature notif!</button>
-                <button onClick={GazToast}>Gaz notif!</button>
-                <button onClick={BellToast}>Bell notif!</button>
-                <button onClick={MvtToast}>Mvt notif!</button>
-                <div><ToastContainer 
-                position="top-center" 
-                autoClose={false} 
-                pauseOnHover></ToastContainer>
-                </div>
-            </div>
-        </div>
+  const TemperatureNotification = () => {
+    return(
+      <div className="TemperatureNotification">
+      <Collapse in={openT}>
+      <Alert color="warning" severity="warning" action={
+              <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                  setOpenT(false);
+                  }}>
+                  <CloseIcon fontSize="warning" />
+              </IconButton>}>
+      contenue de notification de temperature !
+      </Alert>
+      </Collapse>
+    </div>
+    )};
 
-	);
+    const GazNotification = () => {
+      return(
+        <div className="GazNotification">
+          <Collapse in={openG}>
+          <Alert color="warning" severity="warning" action={
+                  <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                      setOpenG(false);
+                      }}>
+                      <CloseIcon fontSize="warning" />
+                  </IconButton>}>
+          contenue de notification de Gaz !
+          </Alert>
+          </Collapse>
+        </div>
+      )};
+
+      const BellNotification = () => {
+        return(
+          <div className="BellNotification">
+          <Collapse in={openB}>
+          <Alert color="warning" severity="warning" action={
+                  <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                      setOpenB(false);
+                      }}>
+                      <CloseIcon fontSize="warning" />
+                  </IconButton>}>
+                  <div>Bell alert</div>
+                    <Link to="/streaming">click here to get streaming video</Link>
+          </Alert>
+          </Collapse>
+        </div>
+        )};
+        const MVTNotification = () => {
+          return(
+            <div className="MVTNotification">
+            <Collapse in={openM}>
+            <Alert color="warning" severity="warning" action={
+                    <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                        onClick={() => {
+                        setOpenM(false);
+                        }}>
+                        <CloseIcon fontSize="warning" />
+                    </IconButton>}>
+                    <div>MVT alert</div>
+                      <Link to="/streaming">click here to get streaming video</Link>
+            </Alert>
+            </Collapse>
+          </div>
+          )};
+  return (
+    <div className="block_notifiaction">
+    <div>
+          <TemperatureNotification></TemperatureNotification>
+          <GazNotification></GazNotification>
+          <MVTNotification></MVTNotification>
+          <BellNotification></BellNotification>
+    </div>
+    </div>
+  );
 }
-export default notification ;
