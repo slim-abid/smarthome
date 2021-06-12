@@ -116,7 +116,7 @@ const genLineData = (moreData = {}, moreData2 = {}) => {
    
    
  } 
-export default class Dashoard extends Component{
+export default class Dashboard extends Component{
  
     
     render(){return(

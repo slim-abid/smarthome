@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd frontend && npm start",
     "dev": "concurrently \"cd frontend && npm start\" \" cd backend && node server.js\" "
   },
   "keywords": [],
@@ -17,6 +18,8 @@
     "mongoose": "^5.12.10",
     "react-bootstrap": "^1.6.0",
     "react-scripts": "^4.0.3",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.3",
     "start": "^5.1.0"
   },
   "devDependencies": {
