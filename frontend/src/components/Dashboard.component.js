@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import { Row, Col, Card, CardHeader, CardBody,  Button,
     ButtonGroup,
     PaginationItem} from 'reactstrap';
@@ -7,70 +8,28 @@ import { Line, Pie, Doughnut, Bar, Radar, Polar } from 'react-chartjs-2';
 import { PageItem } from 'react-bootstrap';
 import Switch from  "react-switch";
 import 'bootstrap/dist/css/bootstrap.min.css';
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-const genLineData = (moreData = {}, moreData2 = {}) => {
-    return {
-      labels: MONTHS,
-      datasets: [
-        {
-          label: 'Dataset 1',
-          backgroundColor: getColor('primary'),
-          borderColor: getColor('primary'),
-          borderWidth: 1,
-          data: [12,51,88,45,12]
-            
-         
-        
-        },
-        {
-          label: 'Dataset 2',
-          backgroundColor: getColor('secondary'),
-          borderColor: getColor('secondary'),
-          borderWidth: 1,
-          data: [45,47,15,20,78]
-           
-          
-        
-        },
-      ],
-    };
-  };
-  const genPieData = () => {
-    return {
-      datasets: [
-        {
-          data: [15,45,20,78,60],
-          backgroundColor: [
-            getColor('primary'),
-            getColor('secondary'),
-            getColor('success'),
-            getColor('info'),
-            getColor('danger'),
-          ],
-          label: 'Dataset 1',
-        },
-      ],
-      labels: ['Data 1', 'Data 2', 'Data 3', 'Data 4', 'Data 5'],
-    };
-  };
-
+import Bulb from 'react-bulb';
+//import { response } from 'express';
+const states={"Room1":false,"Room2":false,"Room3":false,"Alert":false,"Door":false}
+const Indicator={"Bell":"grey"}
   class SwitchExample extends Component  {
     constructor() {
       super();
       this.state = { checked: false };
       this.handleChange = this.handleChange.bind(this);
+      
     }
-  
     handleChange(checked) {
-      this.setState({ checked });
-    }
+    this.setState({checked})
+    axios.post("http://localhost:3001",states).then((response)=>{Indicator["Bell"]=response.data["Bell"]; console.log(Indicator["Bell"]);})}
   
     render() {
       return (
         <label >
             <div>
             
-          <Switch  handleDiameter={28}
+          <Switch       
+    handleDiameter={28}
     offColor="#020929"
     onColor="#1cadd4"
     offHandleColor="#1cadd4"
@@ -82,7 +41,10 @@ const genLineData = (moreData = {}, moreData2 = {}) => {
     className="react-switch"
     id="small-radius-switch"onChange={this.handleChange} checked={this.state.checked} />
         </div>
-        {this.props.room}
+        {this.props.label}
+        {states[this.props.label]=this.state.checked}
+        {console.log(states)}
+        
         </label>
       );
     }
@@ -105,6 +67,7 @@ const genLineData = (moreData = {}, moreData2 = {}) => {
               <div>
               
             <Switch 
+            
              className="material-icons-outlined"
             
             onChange={this.handleAlert} checkedAlert={this.state.checkedAlert} />
@@ -119,8 +82,10 @@ const genLineData = (moreData = {}, moreData2 = {}) => {
 export default class Dashoard extends Component{
  
     
-    render(){return(
-        
+    render(){
+      
+      return(
+
 <PaginationItem>  
 <Row >
     <Col xl={6} lg={12} md={120}>
@@ -128,15 +93,22 @@ export default class Dashoard extends Component{
             <CardHeader>Lights</CardHeader>
             <CardBody>
     
-    <SwitchExample room={"Room1"}></SwitchExample>
-    <SwitchExample room={"Rooom2"}></SwitchExample>
-    <SwitchExample room={"Romm3"}></SwitchExample>
+    <SwitchExample label={"Room1"}></SwitchExample>
+    <SwitchExample label={"Room2"}></SwitchExample>
+    <SwitchExample label={"Room3"}></SwitchExample>
     </CardBody></Card></Col>
-    <Col xl={6} lg={12} md={120}>
+    <Col xl={6} lg={12} md={120}> 
         <Card className="card text-white bg-dark mb-3">
-            <CardHeader>Bloc2</CardHeader>
+            <CardHeader>Security</CardHeader>
             <CardBody>
-                <AlertLauncher> </AlertLauncher>
+                
+                <SwitchExample label={"Alert"}></SwitchExample>
+                <SwitchExample label={"Door"}></SwitchExample>
+                <label> <div>
+                <Bulb size={30} color={Indicator['Bell']}></Bulb>
+                </div>
+                Bell
+                </label>
             </CardBody></Card></Col>
     <Col xl={6} lg={12} md={120}>
         <Card className="card text-white bg-dark mb-3">
@@ -148,6 +120,7 @@ export default class Dashoard extends Component{
             <CardHeader>Bloc4</CardHeader>
             <CardBody>
     </CardBody></Card></Col></Row>
+    
        </PaginationItem> 
               
                           
