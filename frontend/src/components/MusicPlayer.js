@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
-import Player from './components/Player';
-import Control_Clima  from './components/Control_Clima';
-function App() {
+import Player from './Player';
+
+function MusicPlayer() {
   const [songs] = useState([
     {
       title: "Forget me too ft. Halsey",
@@ -54,12 +54,9 @@ function App() {
         nextSongIndex={nextSongIndex} 
         songs={songs}
       />
-
-
-    
     </div>
 
   );
 }
 
-export default App;
+export default MusicPlayer;
