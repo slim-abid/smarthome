@@ -74,11 +74,11 @@ const SolarEnergyGenerated = () => {
         <div className='predection'>
             <div className='predection-clacul'>
                 <div><Calcul className='Calcul'></Calcul></div>
-                <h1>5000  Kw</h1>
+                <h4>5000  Kw</h4>
             </div>
             <div>
                 <div><Money className='Money'></Money></div>
-                <h1>10000  $</h1>
+                <h4>10000  $</h4>
             </div>
         </div>
     )};
@@ -131,19 +131,19 @@ export default function Energy(){
 
 <PaginationItem>  
 <Row >
-<Col xl={6} lg={12} md={120}>
-    <Col xl={12} lg={12} md={120}>
+<Col xl={6} lg={12} md={12}>
+    <Col xl={12} lg={12} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
-            <CardHeader>Total energy consumption [kW] </CardHeader>
+            <CardHeader><h4>Total energy consumption [kW]</h4> </CardHeader>
             <CardBody>
                 <Line data={TotalEnergyConsumption({ fill: false })} />
             </CardBody>
         </Card>
     </Col>
 
-    <Col xl={12} lg={12} md={120}> 
+    <Col xl={12} lg={12} md={12}> 
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
-            <CardHeader>Solar Energy generated</CardHeader>
+            <CardHeader><h4>Solar Energy generated</h4></CardHeader>
             <CardBody>
                 <Pie data={SolarEnergyGenerated()} />
             </CardBody>
@@ -151,9 +151,9 @@ export default function Energy(){
     </Col>
 
 
-    <Col xl={12} lg={12} md={120}>
+    <Col xl={12} lg={12} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
-            <CardHeader>Devices consumption</CardHeader>
+            <CardHeader><h4>Devices consumption</h4></CardHeader>
             <CardBody>
             <Pie data={DevicesConsumption()} />
             </CardBody>
@@ -161,26 +161,26 @@ export default function Energy(){
     </Col>
 </Col>
 <Col xl={6} lg={12} md={120}>
-    <Col xl={12} lg={12} md={120}>
+    <Col xl={12} lg={12} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
-            <CardHeader>Next month Energy consumption predection</CardHeader>
+            <CardHeader><h4>Next month Energy consumption predection</h4></CardHeader>
             <CardBody>
             <NextMonthEnergyConsumptionPredection></NextMonthEnergyConsumptionPredection>
             </CardBody>
         </Card>
     </Col>
 
-    <Col xl={12} lg={12} md={120}> 
+    <Col xl={12} lg={12} md={12}> 
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
-            <CardHeader>data analysis</CardHeader>
+            <CardHeader><h4>data analysis</h4></CardHeader>
             <CardBody><DataAnalysis></DataAnalysis></CardBody>
         </Card>
     </Col>
 
 
-    <Col xl={12} lg={12} md={120}>
+    <Col xl={12} lg={12} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
-            <CardHeader>Advices and Tips</CardHeader>
+            <CardHeader><h4>Advices and Tips</h4></CardHeader>
             <CardBody> <AdvicesAndTips></AdvicesAndTips></CardBody>
         </Card>
     </Col>
