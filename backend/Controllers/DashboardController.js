@@ -2,7 +2,7 @@ const {request, response}=require('express')
 module.exports.dashboard_get=(request,response)=>{
    // const states=request.body
     //console.log(states)
-    const Commands={Bell:"red",Temperature:0}
+    const Commands={Bell:"red",Temperature:0,NotifTemperature:"Temperature",NotifGAZ:"GAZ notif",NotifMVT:"MOUVEMENT",NotifBell:"BELL!!"}
     response.json(Commands)
    
        

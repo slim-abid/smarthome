@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import Button from '@material-ui/core/Button';
 import '../App.css'
+import { render } from 'ejs';
 //import CloseIcon from '@material-ui/icons/Close';
 export default function Notification() {
   const [openT, setOpenT ] = React.useState(true);
@@ -13,8 +14,11 @@ export default function Notification() {
   const [openB, setOpenB ] = React.useState(true);
   const [openM, setOpenM ] = React.useState(true);
 
-  const TemperatureNotification = () => {
-    return(
+  class TemperatureNotification extends React.Component{
+   
+    render(){
+      const TemperatureNotif=this.props.dataFromParent
+      return(
       <div className="TemperatureNotification">
       <Collapse in={openT}>
       <Alert color="warning" severity="warning" action={
@@ -27,14 +31,17 @@ export default function Notification() {
                   }}>
                  
               </IconButton>}>
-      contenue de notification de temperature !
+      {TemperatureNotif}
       </Alert>
       </Collapse>
     </div>
-    )};
+    )}};
 
-    const GazNotification = () => {
-      return(
+    class GazNotification extends React.Component {
+     render()
+     { 
+      const GazNotif=this.props.dataFromParent
+       return(
         <div className="GazNotification">
           <Collapse in={openG}>
           <Alert color="warning" severity="warning" action={
@@ -47,14 +54,16 @@ export default function Notification() {
                       }}>
                       
                   </IconButton>}>
-          contenue de notification de Gaz !
+          {GazNotif}
           </Alert>
           </Collapse>
         </div>
-      )};
+      )}};
 
-      const BellNotification = () => {
-        return(
+      class BellNotification extends React.Component{
+        render(){
+          const BellNotif=this.props.dataFromParent
+          return(
           <div className="BellNotification">
           <Collapse in={openB}>
           <Alert color="warning" severity="warning" action={
@@ -64,19 +73,22 @@ export default function Notification() {
                       size="small"
                       onClick={() => {
                       setOpenB(false);
-                      }}>
+                      }}>}
                       
                       
 
                   </IconButton>}>
-                  <div>Bell alert</div>
+                  <div>{BellNotif}</div>
                     <Link to="/streaming">click here to get streaming video</Link>
           </Alert>
           </Collapse>
         </div>
-        )};
-        const MVTNotification = () => {
-          return(
+        )}}
+       class MVTNotification extends React.Component {
+          render()
+          {
+            const BellNotif=this.props.dataFromParent
+            return(
             <div className="MVTNotification">
             <Collapse in={openM}>
             <Alert color="warning" severity="warning" action={
@@ -89,12 +101,12 @@ export default function Notification() {
                         }}>
                      
                     </IconButton>}>
-                    <div>MVT alert</div>
+                    <div>{BellNotif}</div>
                       <Link to="/streaming">click here to get streaming video</Link>
             </Alert>
             </Collapse>
           </div>
-          )};
+          )}};
   return (
     <div className="block_notifiaction">
     <div>

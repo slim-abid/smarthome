@@ -56,7 +56,7 @@ const states={"Room1":false,"Room2":false,"Room3":false,"Alarm":false,"Door":fal
 export default class Dashoard extends Component  {  
 constructor() {
   super();
-  this.state={Bell:"red",Temperature:100}
+  this.state={Bell:"red",Temperature:0,NotifTemperature:"Temperature",NotifGAZ:"GAZ notif",NotifMVT:"MOUVEMENT",NotifBell:"BELL!!"}
   this.handleUpdate = this.handleUpdate.bind(this); 
 }
 intervalID;
@@ -64,8 +64,12 @@ componentDidMount(){this.getData();}
 componentWillUnmount(){clearTimeout(this.intervalID);}
 getData=(Bell,Temperature)=>{axios.get("http://localhost:3001")
 .then((response)=>{
-this.setState({Bell:response.data.Bell})
+this.setState({Bell:response.data.Bell});
 this.setState({Temperature:response.data.Temperature});
+this.setState({NotifTemperature:response.data.NotifTemperature});
+this.setState({NotifGAZ:response.data.NotifGAZ});
+this.setState({NotifMVT:response.data.NotifMVT});
+this.setState({NotifBell:response.data.NotifBell});
 console.log(this.state);this.intervalID=setTimeout(this.getData.bind(this),1000)})}
 handleUpdate(Bell,Temperature)
 { axios.post("http://localhost:3001",states)
@@ -107,13 +111,13 @@ handleUpdate(Bell,Temperature)
         <Card className="card text-white bg-dark mb-3">
             <CardHeader>Notification</CardHeader>
             <CardBody>
-            <BlockNotification></BlockNotification>
+            <BlockNotification dataFromParent = {this.state.Temperature}></BlockNotification>
     </CardBody></Card></Col>
     <Col xl={6} lg={12} md={120}>
         <Card className="card text-white bg-dark mb-3">
             <CardHeader>Temperature</CardHeader>
             <CardBody>
-              <BlockTemperature dataFromParent = {this.state.Temperature}></BlockTemperature>
+              <BlockTemperature dataFromParent = {this.state.Temperature,this.state.NotifBell}></BlockTemperature>
     </CardBody></Card></Col>
  
     </Row>
