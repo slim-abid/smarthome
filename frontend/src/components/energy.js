@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 //import axios from 'axios' 
 import { RiMoneyDollarCircleFill as Money } from 'react-icons/ri';
-import { IoMdCalculator as Calcul} from 'react-icons/io';
+import {  IoMdCalculator as Calcul} from 'react-icons/io';
 import { TiTickOutline as Tick} from 'react-icons/ti';
 import { Row, Col, Card, CardHeader, CardBody,  Button,
     ButtonGroup, 

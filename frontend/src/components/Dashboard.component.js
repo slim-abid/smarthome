@@ -4,6 +4,7 @@ import BlockNotification from './BlockNotification'
 import MusicPlayer from './MusicPlayer'
 import ControlClima from './ControlClima'
 import 'semantic-ui-css/semantic.min.css'
+import { AiFillBulb } from 'react-icons/ai';
 import axios from 'axios'
 import { Row, Col, Card, CardHeader, CardBody,  Button,ButtonGroup,Container} from 'reactstrap';
 import { getColor } from '../utils/colors';
@@ -29,8 +30,8 @@ const Indicator={"Bell":"grey"}
     render() {
       return (
         <>
-            <div>
-            <h4> {this.props.label}</h4>
+            <div className="mb-2">
+            <h4> {this.props.label} {this.props.light? <AiFillBulb/>:null}</h4> 
           <Switch       
     handleDiameter={20}
     offColor="#020929"
@@ -69,23 +70,23 @@ export default class Dashoard extends Component{
     <Col xl={3} lg={4} md={12}>
     <Col xl={12} lg={4} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
-            <CardHeader>Lights</CardHeader>
+            <CardHeader><h4>Lights</h4></CardHeader>
             <CardBody>
     
-    <SwitchExample label={"Room1"}></SwitchExample>
-    <SwitchExample label={"Room2"}></SwitchExample>
-    <SwitchExample label={"Room3"}></SwitchExample>
+    <SwitchExample label={"Room1"} light={true}></SwitchExample>
+    <SwitchExample label={"Room2"} light={true}></SwitchExample>
+    <SwitchExample label={"Room3"} light={true}></SwitchExample>
     </CardBody></Card></Col>
     <Col xl={12} lg={4} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
-            <CardHeader>Security</CardHeader>
+            <CardHeader><h4>Security</h4></CardHeader>
             <CardBody>
                 
-                <SwitchExample label={"Alert"}></SwitchExample>
+                <SwitchExample label={"Alert"} ></SwitchExample>
                 <SwitchExample label={"Door"}></SwitchExample>
                  <div>
                  <h4>Bell </h4>
-                <Bulb size={30} color={Indicator['Bell']}></Bulb>
+                <Bulb size={20} color={Indicator['Bell']}></Bulb>
                 </div>
                 
                 
