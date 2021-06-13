@@ -68,7 +68,7 @@ export default class Dashoard extends Component{
    </Col> 
     <Col xl={3} lg={4} md={12}>
     <Col xl={12} lg={4} md={12}>
-        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"20px" }}>
+        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader>Lights</CardHeader>
             <CardBody>
     
@@ -77,7 +77,7 @@ export default class Dashoard extends Component{
     <SwitchExample label={"Room3"}></SwitchExample>
     </CardBody></Card></Col>
     <Col xl={12} lg={4} md={12}>
-        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"20px" }}>
+        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader>Security</CardHeader>
             <CardBody>
                 

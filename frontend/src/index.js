@@ -6,7 +6,7 @@ import ControlClima from './components/ControlClima';
 import MusicPlayer from './components/MusicPlayer';
 import Home from './components/HomePage.js'
 import Global from './components/Global'
-
+import Energy from './components/Energy'
 
 import './index.css';
 ReactDOM.render(

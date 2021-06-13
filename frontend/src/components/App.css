@@ -45,6 +45,50 @@ label{
 }
 
 
+/*****************************************energy***************************/
 
+.predection{
+  display:flex;
+  flex-direction:row ; 
+  justify-content: space-between;
+  
+}
+.predection-clacul{
+  display:flex;
+  flex-direction:column ; 
+  justify-content:space-between ; 
+  
+}
+.Calcul{
+  height: 50px;
+  width: 50px;
+  color: rgba(127, 252, 252, 0.842);
+}
+.Money{
+  height: 50px;
+  width: 50px;
+  color: rgba(127, 252, 252, 0.842);
+}
+.Advice{
+  display:flex;
+  flex-direction:column ; 
+  justify-content:space-between ;
+ 
+ 
+   
+}
+.Advice1{
+  display:flex;
+  flex-direction:row ; 
+  justify-content:flex-start ; 
+  height:auto;
+   
+}
+
+.Tick{
+  height: 80px;
+  width: 80px;
+  color: rgba(127, 252, 252, 0.842);
+}
 
 

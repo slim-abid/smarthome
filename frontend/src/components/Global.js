@@ -11,6 +11,7 @@ import { Redirect } from 'react-router-dom'
 import HomePage from './HomePage'
 import Dashboard from './Dashboard.component';
 import Streaming from './Streaming'
+import Energy from './Energy'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +62,7 @@ const themeDark = createMuiTheme({
                         <Switch>
                     
                             <Route path="/" exact={true} component={Dashboard} />
-                            <Route path="/energy" component={Streaming} />
+                            <Route path="/energy" component={Energy} />
                             <Route path="/streaming" component={Streaming} />
                             
                         </Switch>
