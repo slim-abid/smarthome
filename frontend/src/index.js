@@ -6,8 +6,10 @@ import ControlClima from './components/ControlClima';
 import MusicPlayer from './components/MusicPlayer';
 import Home from './components/HomePage.js'
 import Global from './components/Global'
+
+
 import './index.css';
 ReactDOM.render(
-    <Home/>,
+    <Global/>,
   document.getElementById('root')
 );

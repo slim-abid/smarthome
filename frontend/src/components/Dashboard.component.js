@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import BlockTemperature from './BlockTemperature'
+import BlockNotification from './BlockNotification' 
+import MusicPlayer from './MusicPlayer'
+import ControlClima from './ControlClima'
+import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
-import { Row, Col, Card, CardHeader, CardBody,  Button,
-    ButtonGroup,
-    PaginationItem} from 'reactstrap';
+import { Row, Col, Card, CardHeader, CardBody,  Button,ButtonGroup,Container} from 'reactstrap';
 import { getColor } from '../utils/colors';
 import { Line, Pie, Doughnut, Bar, Radar, Polar } from 'react-chartjs-2';
 import { PageItem } from 'react-bootstrap';
@@ -25,71 +28,47 @@ const Indicator={"Bell":"grey"}
   
     render() {
       return (
-        <label >
+        <>
             <div>
-            
+            <h4> {this.props.label}</h4>
           <Switch       
-    handleDiameter={28}
+    handleDiameter={20}
     offColor="#020929"
     onColor="#1cadd4"
     offHandleColor="#1cadd4"
     onHandleColor="#020929"
-    height={40}
-    width={70}
+    height={20}
+    width={50}
     uncheckedIcon={false}
     checkedIcon={false}
     className="react-switch"
     id="small-radius-switch"onChange={this.handleChange} checked={this.state.checked} />
         </div>
-        {this.props.label}
+       
+       
         {states[this.props.label]=this.state.checked}
-        {console.log(states)}
         
-        </label>
+        </>
       );
     }
   }
- class AlertLauncher extends Component{
-    
-    constructor() {
-        super();
-        this.state = { checkedAlert: false };
-        this.handleAlert = this.handleAlert.bind(this);
-      }
-    
-      handleAlert(checkedAlert) {
-        this.setState({ checkedAlert });
-      }
-    
-      render() {
-        return (
-          <label >
-              <div>
-              
-            <Switch 
-            
-             className="material-icons-outlined"
-            
-            onChange={this.handleAlert} checkedAlert={this.state.checkedAlert} />
-          </div>
-          </label>
-        );
-      }
-
-   
-   
- } 
-export default class Dashboard extends Component{
+ 
+export default class Dashoard extends Component{
  
     
     render(){
       
       return(
 
-<PaginationItem>  
+<Container>
 <Row >
-    <Col xl={6} lg={12} md={120}>
-        <Card className="card text-white bg-dark mb-3">
+    <Col xl={12} lg={12} md={12} style={{marginBottom:"10px"}}>
+        
+            <BlockNotification></BlockNotification>
+   </Col> 
+    <Col xl={3} lg={4} md={12}>
+    <Col xl={12} lg={4} md={12}>
+        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"20px" }}>
             <CardHeader>Lights</CardHeader>
             <CardBody>
     
@@ -97,39 +76,37 @@ export default class Dashboard extends Component{
     <SwitchExample label={"Room2"}></SwitchExample>
     <SwitchExample label={"Room3"}></SwitchExample>
     </CardBody></Card></Col>
-    <Col xl={6} lg={12} md={120}> 
-        <Card className="card text-white bg-dark mb-3">
+    <Col xl={12} lg={4} md={12}>
+        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"20px" }}>
             <CardHeader>Security</CardHeader>
             <CardBody>
                 
                 <SwitchExample label={"Alert"}></SwitchExample>
                 <SwitchExample label={"Door"}></SwitchExample>
-                <label> <div>
+                 <div>
+                 <h4>Bell </h4>
                 <Bulb size={30} color={Indicator['Bell']}></Bulb>
                 </div>
-                Bell
-                </label>
-            </CardBody></Card></Col>
-    <Col xl={6} lg={12} md={120}>
-        <Card className="card text-white bg-dark mb-3">
-            <CardHeader>Bloc3</CardHeader>
-            <CardBody>
-    </CardBody></Card></Col>
-    <Col xl={6} lg={12} md={120}>
-        <Card className="card text-white bg-dark mb-3">
-            <CardHeader>Bloc4</CardHeader>
-            <CardBody>
-    </CardBody></Card></Col></Row>
+                
+                
+            </CardBody></Card>
+            </Col>
+      </Col>
     
-       </PaginationItem> 
-              
-                          
+    <Col xl={5} lg={12} md={12}>
+              <MusicPlayer></MusicPlayer>
+    </Col>
+    <Col xl={3} lg={12} md={12}>
 
-        
+      <ControlClima/>
+
+    </Col>
+
+ 
     
-   
-
-
+    </Row>
+    
+    </Container>
 
     )}
 

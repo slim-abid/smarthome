@@ -11,12 +11,12 @@ export default class NavigationBar extends Component {
     const mystyle = {backgroundColor:"#1A244F",color:"white"}
     return (
       
-      <Menu icon='labeled' vertical >
+      <Menu icon='labeled' vertical style={{height:"100%"}}>
         <Menu.Item
           name='dashboard'
           active={activeItem === 'dashboard'}
           onClick={this.handleItemClick}
-          href="dashboard"
+          href="/"
           style={mystyle}
         >
           <Icon name='dashboard' />
