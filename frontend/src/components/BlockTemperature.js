@@ -1,14 +1,15 @@
 import React, {useState} from 'react'; 
 import { GiComputerFan as Fan } from 'react-icons/gi';
 import Thermometer from 'react-thermometer-component'
-import './App.css' ;
+import '../App.css' ;
 import SwitchButton from './SwitchButton' ;
-const BlockTemperature =()=>{
-    const TemperatureValue =20 
+class BlockTemperature extends React.Component{
+
+    render(){
+        const TemperatureValue =this.props.dataFromParent
     return (
-    <div className="block_temperature"> 
         <div className="temperature-display-container">
-            <label className="temperatureTitle">Temperature Mesure</label>
+    
             <div className="thermo"> 
                 <Thermometer
                     theme="dark"
@@ -28,7 +29,7 @@ const BlockTemperature =()=>{
                 </div>
             </div>
         </div>
-    </div>
+    
     )
-}
+}}
 export default BlockTemperature;

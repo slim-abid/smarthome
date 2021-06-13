@@ -5,7 +5,8 @@ import Alert from '@material-ui/lab/Alert';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import Button from '@material-ui/core/Button';
-import CloseIcon from '@material-ui/icons/Close';
+import '../App.css'
+//import CloseIcon from '@material-ui/icons/Close';
 export default function Notification() {
   const [openT, setOpenT ] = React.useState(true);
   const [openG, setOpenG ] = React.useState(true);
@@ -24,7 +25,7 @@ export default function Notification() {
                   onClick={() => {
                   setOpenT(false);
                   }}>
-                  <CloseIcon fontSize="warning" />
+                 
               </IconButton>}>
       contenue de notification de temperature !
       </Alert>
@@ -44,7 +45,7 @@ export default function Notification() {
                       onClick={() => {
                       setOpenG(false);
                       }}>
-                      <CloseIcon fontSize="warning" />
+                      
                   </IconButton>}>
           contenue de notification de Gaz !
           </Alert>
@@ -64,7 +65,9 @@ export default function Notification() {
                       onClick={() => {
                       setOpenB(false);
                       }}>
-                      <CloseIcon fontSize="warning" />
+                      
+                      
+
                   </IconButton>}>
                   <div>Bell alert</div>
                     <Link to="/streaming">click here to get streaming video</Link>
@@ -84,7 +87,7 @@ export default function Notification() {
                         onClick={() => {
                         setOpenM(false);
                         }}>
-                        <CloseIcon fontSize="warning" />
+                     
                     </IconButton>}>
                     <div>MVT alert</div>
                       <Link to="/streaming">click here to get streaming video</Link>
@@ -95,7 +98,7 @@ export default function Notification() {
   return (
     <div className="block_notifiaction">
     <div>
-          <TemperatureNotification></TemperatureNotification>
+          <TemperatureNotification className='Notif'></TemperatureNotification>
           <GazNotification></GazNotification>
           <MVTNotification></MVTNotification>
           <BellNotification></BellNotification>

@@ -7,6 +7,9 @@ body{
   line-height: 1.5;
   color: #d0deec36;
   text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0%;
 
 
 }
@@ -42,6 +45,65 @@ label{
   display: inline-block;
   margin-right: 50px;
   margin-bottom: .5rem;
+}
+
+.block_temperature {
+  height: 400px;
+  width: 300px;
+  background: #2f1c33;
+  border-radius: 20px;
+  box-shadow: 10px 10px 38px 0px rgba(0, 0, 0, 0.75);
+}
+
+.temperature-display-container {
+  display:flex ; 
+  flex-direction:column;
+  height: 100%;
+  justify-content:space-evenly
+  }
+
+.thermo{
+  display: flex;
+  flex-direction:row;
+  justify-content:space-evenly ; 
+}
+.fan {
+  display: flex;
+  flex-direction:row;
+  justify-content:space-evenly ; 
+}
+
+.Fan{
+height: 50px;
+width: 50px;
+color: azure;
+}
+
+
+/*text */
+
+.text-header {
+   color: white;
+    text-align: center;
+     top: 30px; width: 110px; 
+     left: 35%; position: absolute;
+     
+    }
+
+
+/* switch.css */
+
+.react-switch {
+  vertical-align: middle;
+  margin-left: 4px;
+  
+}
+.Notif{
+  background-color: #2f1c33;
+
+}
+.ui.menu:first-child {
+  margin-bottom: auto;
 }
 
 

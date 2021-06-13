@@ -31,11 +31,10 @@ const ControlClima=()=>{
 
     return (
         
-<div className="app-container"> 
-<h3 className="icon">  <FaTemperatureHigh /> </h3>
-      
+<div > 
+
      <div className="temperature-display-container ">
-     <div class="text-header">CONTACT</div>
+     
         <div className={`temperature-display ${TemperatureColor}`}>{TemperatureValue}°C</div>
      </div>
        <div className='button-container'>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Icon, Menu } from 'semantic-ui-react'
+import axios from "axios"
 export default class NavigationBar extends Component {
   state = { activeItem : 'none' }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -7,6 +8,7 @@ export default class NavigationBar extends Component {
   render() {
     const { activeItem } = this.state
     const mystyle = {color: "#00CC66" , backgroundColor: "#000066" }
+    //axios.get("http://localhost:3001").then((response)=>{console.log(response.data);})
     return (
       <Menu icon='labeled' vertical>
         <Menu.Item
@@ -14,7 +16,7 @@ export default class NavigationBar extends Component {
           active={activeItem === 'dashboard'}
           onClick={this.handleItemClick}
           href="dashboard"
-          //style={mystyle}
+          style={mystyle}
         >
           <Icon name='dashboard' />
           Dashboard
@@ -24,7 +26,7 @@ export default class NavigationBar extends Component {
           active={activeItem === 'energy'}
           onClick={this.handleItemClick}
           href="energy"
-          //style={mystyle}
+          style={mystyle}
         >
           <Icon name='chart line' />
           Energy
@@ -34,7 +36,7 @@ export default class NavigationBar extends Component {
           active={activeItem === 'streaming'}
           onClick={this.handleItemClick}
           href="streaming"
-          //style={mystyle}
+          style={mystyle}
         >
           <Icon name='video' />
           Streaming
@@ -45,7 +47,7 @@ export default class NavigationBar extends Component {
           active={activeItem === 'logout'}
           onClick={this.handleItemClick}
           href="home"
-          //style={mystyle}
+          style={mystyle}
         >
           <Icon name='logout' />
           Log out

@@ -26,8 +26,15 @@ export default class Login extends Component{
         }
         console.log(LogUser);
         axios.post("http://localhost:3001/login",LogUser)
-        .then(response=>console.log(response.data))
-        this.setState({ Email:'', Password:''})
+        .then( response=>{console.log(response.data);window.location="/dashboard"})
+        .catch ((error) =>{ window.location="/login"})
+           
+        
+          
+        //this.setState({ Email:'', Password:''})
+       
+        
+        
       
                
 
@@ -54,7 +61,7 @@ export default class Login extends Component{
             />
       </div>
       <div className="form-group">
-        <input type="submit" value="Create User" className="btn btn-primary" />
+        <input type="submit" value="Login" className="btn btn-primary" />
       </div>
     </form>
   </div>

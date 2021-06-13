@@ -1,6 +1,6 @@
-import React, { Component , useState } from "react";
+import React, { useState } from "react";
 import Switch from "react-switch";
-import './App.css';
+import '../App.css';
 const SwitchButton = () => {
     const [checked, setChecked] = useState(false);
     const handleChange = nextChecked => {

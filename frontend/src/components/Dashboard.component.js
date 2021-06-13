@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import BlockTemperature from './BlockTemperature'
+import BlockNotification from './BlockNotification' 
+import MusicPlayer from './MusicPlayer'
+import ControlClima from './ControlClima'
+import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
 import { Row, Col, Card, CardHeader, CardBody,  Button,
     ButtonGroup,
@@ -9,9 +14,7 @@ import { PageItem } from 'react-bootstrap';
 import Switch from  "react-switch";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Bulb from 'react-bulb';
-//import { response } from 'express';
-const states={"Room1":false,"Room2":false,"Room3":false,"Alert":false,"Door":false}
-const Indicator={"Bell":"grey"}
+const states={"Room1":false,"Room2":false,"Room3":false,"Alarm":false,"Door":false}
   class SwitchExample extends Component  {
     constructor() {
       super();
@@ -20,8 +23,8 @@ const Indicator={"Bell":"grey"}
       
     }
     handleChange(checked) {
-    this.setState({checked})
-    axios.post("http://localhost:3001",states).then((response)=>{Indicator["Bell"]=response.data["Bell"]; console.log(Indicator["Bell"]);})}
+    this.setState({checked})}
+    //axios.post("http://localhost:3001",states).then((response)=>{console.log(response.data);})}
   
     render() {
       return (
@@ -39,7 +42,7 @@ const Indicator={"Bell":"grey"}
     uncheckedIcon={false}
     checkedIcon={false}
     className="react-switch"
-    id="small-radius-switch"onChange={this.handleChange} checked={this.state.checked} />
+    id="small-radius-switch" onChange={this.handleChange} checked={this.state.checked} />
         </div>
         {this.props.label}
         {states[this.props.label]=this.state.checked}
@@ -49,51 +52,41 @@ const Indicator={"Bell":"grey"}
       );
     }
   }
- class AlertLauncher extends Component{
-    
-    constructor() {
-        super();
-        this.state = { checkedAlert: false };
-        this.handleAlert = this.handleAlert.bind(this);
-      }
-    
-      handleAlert(checkedAlert) {
-        this.setState({ checkedAlert });
-      }
-    
-      render() {
-        return (
-          <label >
-              <div>
-              
-            <Switch 
-            
-             className="material-icons-outlined"
-            
-            onChange={this.handleAlert} checkedAlert={this.state.checkedAlert} />
-          </div>
-          </label>
-        );
-      }
-
-   
-   
- } 
-export default class Dashoard extends Component{
  
+export default class Dashoard extends Component  {  
+constructor() {
+  super();
+  this.state={Bell:"red",Temperature:100}
+  this.handleUpdate = this.handleUpdate.bind(this); 
+}
+intervalID;
+componentDidMount(){this.getData();}
+componentWillUnmount(){clearTimeout(this.intervalID);}
+getData=(Bell,Temperature)=>{axios.get("http://localhost:3001")
+.then((response)=>{
+this.setState({Bell:response.data.Bell})
+this.setState({Temperature:response.data.Temperature});
+console.log(this.state);this.intervalID=setTimeout(this.getData.bind(this),1000)})}
+handleUpdate(Bell,Temperature)
+{ axios.post("http://localhost:3001",states)
+.then((response)=>{console.log("Sent to backend");
+})
+  
+ 
+}
     
     render(){
       
       return(
 
-<PaginationItem>  
+<PaginationItem onClick={this.handleUpdate}>  
 <Row >
     <Col xl={6} lg={12} md={120}>
         <Card className="card text-white bg-dark mb-3">
             <CardHeader>Lights</CardHeader>
             <CardBody>
     
-    <SwitchExample label={"Room1"}></SwitchExample>
+    <SwitchExample label={"Room1"} ></SwitchExample>
     <SwitchExample label={"Room2"}></SwitchExample>
     <SwitchExample label={"Room3"}></SwitchExample>
     </CardBody></Card></Col>
@@ -105,21 +98,39 @@ export default class Dashoard extends Component{
                 <SwitchExample label={"Alert"}></SwitchExample>
                 <SwitchExample label={"Door"}></SwitchExample>
                 <label> <div>
-                <Bulb size={30} color={Indicator['Bell']}></Bulb>
+                <Bulb size={30} color={this.state.Bell}></Bulb>
                 </div>
                 Bell
                 </label>
             </CardBody></Card></Col>
     <Col xl={6} lg={12} md={120}>
         <Card className="card text-white bg-dark mb-3">
-            <CardHeader>Bloc3</CardHeader>
+            <CardHeader>Notification</CardHeader>
             <CardBody>
+            <BlockNotification></BlockNotification>
     </CardBody></Card></Col>
     <Col xl={6} lg={12} md={120}>
         <Card className="card text-white bg-dark mb-3">
-            <CardHeader>Bloc4</CardHeader>
+            <CardHeader>Temperature</CardHeader>
             <CardBody>
-    </CardBody></Card></Col></Row>
+              <BlockTemperature dataFromParent = {this.state.Temperature}></BlockTemperature>
+    </CardBody></Card></Col>
+ 
+    </Row>
+    <Row>
+    <Col xl={6} lg={12} md={120}>
+        <Card className="card text-white bg-dark mb-3">
+            <CardHeader>Music Player</CardHeader>
+            <CardBody>
+              <MusicPlayer></MusicPlayer>
+    </CardBody></Card></Col>
+    <Col xl={6} lg={12} md={120}>
+      <Card>
+      <CardBody>
+      <ControlClima
+      ></ControlClima>
+      </CardBody></Card></Col>
+    </Row>
     
        </PaginationItem> 
               
