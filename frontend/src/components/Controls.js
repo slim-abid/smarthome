@@ -8,7 +8,7 @@ function Controls(props) {
             <button className="skip-btn" onClick={() => props.SkipSong(false)}>
                 <FontAwesomeIcon icon={faBackward} />
             </button>
-            <button className="play-btn" onClick={() => props.setIsPlaying(!props.isPlaying)}>
+            <button className="play-btn" style={{backgroundColor:"#1CADD4"}} onClick={() => props.setIsPlaying(!props.isPlaying)}>
                 <FontAwesomeIcon icon={props.isPlaying ? faPause : faPlay} style={{margin:"auto"}} />
             </button>
             <button className="skip-btn" onClick={() => props.SkipSong()}>

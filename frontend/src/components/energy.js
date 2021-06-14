@@ -13,7 +13,7 @@ import Switch from  "react-switch";
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Bulb from 'react-bulb'; 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July' , 'August' , 'September' , 'October' , 'November', 'December'];
-const TotalEnergyConsumption = (moreData = {}) => {
+export const TotalEnergyConsumption = (moreData = {}) => {
   return {
     labels: MONTHS,
     datasets: [
@@ -42,7 +42,7 @@ const TotalEnergyConsumption = (moreData = {}) => {
 };
 
 
-const SolarEnergyGenerated = () => {
+export const SolarEnergyGenerated = () => {
     return {
       datasets: [
         {
@@ -56,7 +56,7 @@ const SolarEnergyGenerated = () => {
     };
   };
 
-  const DevicesConsumption = () => {
+  export const DevicesConsumption = () => {
     return {
       datasets: [
         {
@@ -69,7 +69,7 @@ const SolarEnergyGenerated = () => {
       labels: ['Dishwasher','four1', 'microwave' , 'Fridge'  ,'four2'],
     };
   };
-  const NextMonthEnergyConsumptionPredection = () => {
+  export const NextMonthEnergyConsumptionPredection = () => {
     return(
         <div className='predection'>
             <div className='predection-clacul'>
@@ -82,50 +82,50 @@ const SolarEnergyGenerated = () => {
             </div>
         </div>
     )};
-    const AdvicesAndTips = () => {
+    export const AdvicesAndTips = () => {
         return(
             <div className='Advice' style={{borderRadius:"10px"}}>
                 <div className='Advice1'>
-                    <div><Tick className='Tick' style={{height:"50%"}}></Tick></div>
+                    <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
                     <h5 style={{marginTop:"10px"}}>bla bla bla advice</h5>
                 </div>
                 <div className='Advice1'>
-                    <div><Tick className='Tick' style={{height:"50%"}}></Tick></div>
+                    <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
                     <h5 style={{marginTop:"10px"}}>bla bla bla advice</h5>
                 </div>
                 <div className='Advice1'>
-                    <div><Tick className='Tick' style={{height:"50%"}}></Tick></div>
+                    <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
                     <h5 style={{marginTop:"10px"}}>bla bla bla advice</h5>
                 </div>
                 <div className='Advice1'>
-                    <div><Tick className='Tick' style={{height:"50%"}}></Tick></div>
+                    <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
                     <h5 style={{marginTop:"10px"}}>bla bla bla advice</h5>
                 </div>
             </div>
         )};
     
-        const DataAnalysis = () => {
+        export const DataAnalysis = () => {
             return(
                 <div className='Advice'>
                     <div className='Advice1'>
-                        <div><Tick className='Tick' style={{height:"50%"}}></Tick></div>
+                        <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
+                        <h5 style={{marginTop:"10px",marginBottom:"0px"}}>Analysis 1</h5>
+                    </div>
+                    <div className='Advice1'>
+                        <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
                         <h5 style={{marginTop:"10px"}}>Analysis 1</h5>
                     </div>
                     <div className='Advice1'>
-                        <div><Tick className='Tick' style={{height:"50%"}}></Tick></div>
+                        <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
                         <h5 style={{marginTop:"10px"}}>Analysis 1</h5>
                     </div>
                     <div className='Advice1'>
-                        <div><Tick className='Tick' style={{height:"50%"}}></Tick></div>
-                        <h5 style={{marginTop:"10px"}}>Analysis 1</h5>
-                    </div>
-                    <div className='Advice1'>
-                        <div><Tick className='Tick' style={{height:"50%"}}></Tick></div>
+                        <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
                         <h5 style={{marginTop:"10px"}}>Analysis 1</h5>
                     </div>
                 </div>
             )};
-export default function Energy(){
+export function Energy(){
 
       return(
 
@@ -149,8 +149,6 @@ export default function Energy(){
             </CardBody>
         </Card>
     </Col>
-
-
     <Col xl={12} lg={12} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader><h4>Devices consumption</h4></CardHeader>

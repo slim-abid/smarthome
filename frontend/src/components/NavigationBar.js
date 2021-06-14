@@ -22,17 +22,6 @@ export default class NavigationBar extends Component {
           <Icon name='dashboard' />
           Dashboard
         </Menu.Item>
-        <Divider style={{width:"70%"}}/>
-        <Menu.Item
-          name='energy'
-          active={activeItem === 'energy'}
-          onClick={this.handleItemClick}
-          href="energy"
-          style={mystyle}
-        >
-          <Icon name='chart line' />
-          Energy
-        </Menu.Item>
         <Divider/>
         <Menu.Item
           name='streaming'

@@ -13,6 +13,7 @@ import { PageItem } from 'react-bootstrap';
 import Switch from  "react-switch";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Bulb from 'react-bulb';
+import {Energy, TotalEnergyConsumption, AdvicesAndTips,  SolarEnergyGenerated , DevicesConsumption , NextMonthEnergyConsumptionPredection , DataAnalysis}  from './Energy'
 //import { response } from 'express';
 const states={"Room1":false,"Room2":false,"Room3":false,"Alert":false,"Door":false}
 const Indicator={"Bell":"grey"}
@@ -31,7 +32,7 @@ const Indicator={"Bell":"grey"}
       return (
         <>
             <div className="mb-2">
-            <h4> {this.props.label} {this.props.light? <AiFillBulb/>:null}</h4> 
+            <h5> {this.props.label} {this.props.light? <AiFillBulb/>:null}</h5> 
           <Switch       
     handleDiameter={20}
     offColor="#020929"
@@ -67,8 +68,8 @@ export default class Dashoard extends Component{
         
             <BlockNotification></BlockNotification>
    </Col> 
-    <Col xl={3} lg={4} md={12}>
-    <Col xl={12} lg={4} md={12}>
+    <Col xl={3} lg={3} md={12}>
+    <Col xl={12} lg={12} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader><h4>Lights</h4></CardHeader>
             <CardBody>
@@ -77,7 +78,7 @@ export default class Dashoard extends Component{
     <SwitchExample label={"Room2"} light={true}></SwitchExample>
     <SwitchExample label={"Room3"} light={true}></SwitchExample>
     </CardBody></Card></Col>
-    <Col xl={12} lg={4} md={12}>
+    <Col xl={12} lg={12} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader><h4>Security</h4></CardHeader>
             <CardBody>
@@ -94,17 +95,82 @@ export default class Dashoard extends Component{
             </Col>
       </Col>
     
-    <Col xl={5} lg={12} md={12}>
+    <Col xl={5} lg={5} md={12}>
+      <Col xl={12} lg={12} md={12} >
+      <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
+            <CardHeader><h4>Total energy consumption [kW]</h4> </CardHeader>
+            <CardBody>
+                <Line data={TotalEnergyConsumption({ fill: false })} />
+            </CardBody>
+        </Card>
+      </Col>
+      <Col xl={12} lg={12} md={12}>
+      <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px",height:"auto",padding:"0" }}>
+            <CardHeader><h4>Playing now</h4></CardHeader>
+            <CardBody >
               <MusicPlayer></MusicPlayer>
+              </CardBody></Card>
+      </Col>
+      
     </Col>
-    <Col xl={3} lg={12} md={12}>
-
+    <Col xl={4} lg={4} md={12}>
+    <Col xl={12} lg={12} md={12}>
+    <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
+            <CardHeader><h4>Climat controls</h4></CardHeader>
+            <CardBody>
       <ControlClima/>
+            </CardBody>
+        </Card>
+      </Col>
+      <Col xl={12} lg={12} md={12}>
+        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
+            <CardHeader><h4>Next month Energy consumption predection</h4></CardHeader>
+            <CardBody>
+            <NextMonthEnergyConsumptionPredection></NextMonthEnergyConsumptionPredection>
+            </CardBody>
+        </Card>
+    </Col>
 
     </Col>
 
  
     
+    </Row>
+    <Row>
+    <Col xl={8} lg={12} md={12}>
+    <Col xl={12} lg={12} md={12}>
+        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
+            <CardHeader><h4>Devices consumption</h4></CardHeader>
+            <CardBody style={{width:"50%", margin:"auto"}}>
+            <Pie height={100} width={100} data={DevicesConsumption()} />
+            </CardBody>
+        </Card>
+    </Col>
+    <Col xl={12} lg={12} md={12} className="mb-0"> 
+        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
+            <CardHeader><h4>Solar Energy generated</h4></CardHeader>
+            <CardBody style={{width:"50%", margin:"auto"}}>
+                <Pie data={SolarEnergyGenerated()} />
+            </CardBody>
+        </Card>
+    </Col>
+    </Col>
+    <Col xl={4} lg={12} md={12}> 
+      <Col xl={12} lg={12} md={12}> 
+        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
+            <CardHeader><h4>data analysis</h4></CardHeader>
+            <CardBody><DataAnalysis></DataAnalysis></CardBody>
+        </Card>
+      </Col>
+      <Col xl={12} lg={12} md={12}> 
+      
+        <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
+            <CardHeader><h4>Advices and Tips</h4></CardHeader>
+            <CardBody> <AdvicesAndTips></AdvicesAndTips></CardBody>
+        </Card>
+    
+      </Col>
+    </Col>
     </Row>
     
     </Container>

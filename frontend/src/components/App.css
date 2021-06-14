@@ -81,7 +81,9 @@ label{
   display:flex;
   flex-direction:row ; 
   justify-content:flex-start ; 
-  height:auto;
+  height:20px;
+  padding-bottom:15px;
+  margin-bottom:15px;
    
 }
 
