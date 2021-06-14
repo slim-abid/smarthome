@@ -36,7 +36,7 @@ import http from './http-common'
       return (
         <>
             <div className="mb-2">
-            <h5> {this.props.label} {this.props.light? <AiFillBulb/>:null}</h5> 
+            <h5> {this.props.label} {this.props.light? <AiFillBulb size="1.5em"/>:null}</h5> 
           <Switch       
     handleDiameter={20}
     offColor="#020929"
@@ -62,7 +62,7 @@ export default class Dashoard extends Component{
   constructor(props) {
     super(props);
     this.state = { 
-      data:{notification:{gaz:"haw famma gaz",temperature:"26 degre",mvt:"",bell:"Bell is ringing!"},Room1:false,Room2:true,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18}
+      data:{notification:{gaz:"haw famma gaz",temperature:"26 Degree",mvt:"",bell:"Bell is ringing!"},Room1:false,Room2:true,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18}
     };  
   }
   ///////////////////////////////////////////
@@ -78,7 +78,20 @@ export default class Dashoard extends Component{
     console.log("this is data to be passed",checked)
     this.setState({data:dataObj})
     console.log('this is data from switches',this.state.data)
-    axios.post("http://localhost:3001",this.state.data).then((response)=>{console.log("ll");})
+    http.post('switch/',{label:checked})
+        .then(res => {
+          if (res.status === 200) {
+            console.log('switcher sent succesfully')
+          } else { 
+            const error = new Error(res.error);
+            throw error;
+          }
+        })
+        .catch(err => {
+          console.log('error and data are ',{label:checked})
+          console.error(err);
+          
+        });
   }
  
   changeVentilateur = (onVent) => {
@@ -86,6 +99,20 @@ export default class Dashoard extends Component{
     dataObj.ventilateur = onVent;
     this.setState({data:dataObj});
     console.log('this is data from ventilateur',onVent)
+    http.post('ventilateur/',{ventilateur:onVent})
+        .then(res => {
+          if (res.status === 200) {
+            console.log('ventilateur sent succesfully')
+          } else { 
+            const error = new Error(res.error);
+            throw error;
+          }
+        })
+        .catch(err => {
+          console.log('error and data are ',{ventilateur:onVent})
+          console.error(err);
+          
+        });
   }
    ////////////////////////////////////////////
     render(){

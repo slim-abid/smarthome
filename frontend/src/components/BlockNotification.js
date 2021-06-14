@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     '& > * + *': {
       marginTop: theme.spacing(2),
     },
+    
    
   },
 }));
@@ -31,7 +32,7 @@ export default function Notification(props) {
       return(
       <div className={classes.notification}>
       <Collapse in={openT}>
-          <Alert color="warning" severity="warning" style={{height:"50px"}} action={
+          <Alert severity="warning" style={{color:"white",height:"50px",backgroundColor:"#393D43","borderLeftStyle":"solid","borderLeftColor":"#36A2EB","borderLeftWidth":"10px"}} action={
                   <IconButton
                       aria-label="close"
                       color="inherit"
@@ -54,7 +55,7 @@ export default function Notification(props) {
       return(
         <div className={classes.notification}>
           <Collapse in={openG}>
-          <Alert color="warning" severity="warning" style={{height:"50px"}} action={
+          <Alert severity="warning" style={{color:"white",height:"50px",backgroundColor:"#393D43","borderLeftStyle":"solid","borderLeftColor":"#36A2EB","borderLeftWidth":"10px"}} action={
                   <IconButton
                       aria-label="close"
                       color="inherit"
@@ -76,7 +77,7 @@ export default function Notification(props) {
           return(
           <div className={classes.notification}>
           <Collapse in={openB}>
-          <Alert color="warning" severity="warning" style={{height:"50px"}} action={
+          <Alert severity="warning" style={{color:"white",height:"50px",backgroundColor:"#393D43","borderLeftStyle":"solid","borderLeftColor":"#36A2EB","borderLeftWidth":"10px"}} action={
                   <IconButton
                       aria-label="close"
                       color="inherit"
@@ -98,7 +99,7 @@ export default function Notification(props) {
             return(
             <div className={classes.notification}>
             <Collapse in={openM}>
-            <Alert color="warning" severity="warning" style={{height:"50px"}} action={
+            <Alert severity="warning" style={{color:"white",height:"50px",backgroundColor:"#393D43","borderLeftStyle":"solid","borderLeftColor":"#36A2EB","borderLeftWidth":"10px"}} action={
                     <IconButton
                         aria-label="close"
                         color="inherit"
