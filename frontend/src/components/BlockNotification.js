@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
+import axios from 'axios'
 const useStyles = makeStyles((theme) => ({
   notification: {
     margin:"5px",
@@ -16,14 +17,18 @@ const useStyles = makeStyles((theme) => ({
    
   },
 }));
-export default function Notification() {
+const data = {notification:{gaz:"haw famma gaz",temperature:"26 degre",mvt:"",bell:""}};
+export default function Notification(props) {
   const [openT, setOpenT ] = React.useState(true);
   const [openG, setOpenG ] = React.useState(true);
   const [openB, setOpenB ] = React.useState(true);
   const [openM, setOpenM ] = React.useState(true);
   const classes = useStyles();
-  const TemperatureNotification = () => {
-    return(
+  class TemperatureNotification extends React.Component{
+   
+    render(){
+      const TemperatureNotif=this.props.dataFromParent
+      return(
       <div className={classes.notification}>
       <Collapse in={openT}>
           <Alert color="warning" severity="warning" style={{height:"50px"}} action={
@@ -36,13 +41,16 @@ export default function Notification() {
                       }}>
                       <CloseIcon  />
                   </IconButton>}>
-          contenue de notification de Gaz !
+                  {TemperatureNotif}
           </Alert>
           </Collapse>
     </div>
-    )};
+   )}};
 
-    const GazNotification = () => {
+   class GazNotification extends React.Component {
+    render()
+    { 
+     const GazNotif=this.props.dataFromParent
       return(
         <div className={classes.notification}>
           <Collapse in={openG}>
@@ -56,14 +64,16 @@ export default function Notification() {
                       }}>
                       <CloseIcon  />
                   </IconButton>}>
-          contenue de notification de Gaz !
+                  {GazNotif}
           </Alert>
           </Collapse>
         </div>
-      )};
+      )}};
 
-      const BellNotification = () => {
-        return(
+      class BellNotification extends React.Component{
+        render(){
+          const BellNotif=this.props.dataFromParent
+          return(
           <div className={classes.notification}>
           <Collapse in={openB}>
           <Alert color="warning" severity="warning" style={{height:"50px"}} action={
@@ -76,14 +86,16 @@ export default function Notification() {
                       }}>
                       <CloseIcon fontSize="warning" />
                   </IconButton>}>
-                  <div>Bell alert <Link to="/streaming">click here to get streaming video</Link></div>
-                    
+                  {BellNotif}
           </Alert>
           </Collapse>
         </div>
-        )};
-        const MVTNotification = () => {
-          return(
+        )}}
+        class MVTNotification extends React.Component {
+          render()
+          {
+            const BellNotif=this.props.dataFromParent
+            return(
             <div className={classes.notification}>
             <Collapse in={openM}>
             <Alert color="warning" severity="warning" style={{height:"50px"}} action={
@@ -96,20 +108,21 @@ export default function Notification() {
                         }}>
                         <CloseIcon fontSize="warning" />
                     </IconButton>}>
-                    <div>MVT alert <Link to="/streaming">click here to get streaming video</Link></div>
+                    
+                    <div>{BellNotif} <Link to="/streaming">click here to get streaming video</Link></div>
                       
             </Alert>
             </Collapse>
           </div>
-          )};
+          )}};
   return (
     <div >
-    
-          <TemperatureNotification></TemperatureNotification>
-          <GazNotification></GazNotification>
-          <MVTNotification></MVTNotification>
-          <BellNotification></BellNotification>
-  
+       
+         {props.data.temperature? <TemperatureNotification dataFromParent={props.data.temperature}></TemperatureNotification> : null } 
+         {props.data.gaz? <GazNotification dataFromParent={props.data.gaz}></GazNotification> : null } 
+         {props.data.mvt? <MVTNotification dataFromParent={props.data.mvt}></MVTNotification> : null } 
+         {props.data.bell? <BellNotification dataFromParent={props.data.bell}></BellNotification> : null } 
+          
     </div>
   );
 }

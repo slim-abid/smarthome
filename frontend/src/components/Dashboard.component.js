@@ -15,19 +15,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Bulb from 'react-bulb';
 import {Energy, TotalEnergyConsumption, AdvicesAndTips,  SolarEnergyGenerated , DevicesConsumption , NextMonthEnergyConsumptionPredection , DataAnalysis}  from './Energy'
 //import { response } from 'express';
-const states={"Room1":false,"Room2":false,"Room3":false,"Alert":false,"Door":false}
-const Indicator={"Bell":"grey"}
+import http from './http-common'
+
+//****************************************** */
+// data is in data state 
+//****************************************** */
   class SwitchExample extends Component  {
-    constructor() {
-      super();
-      this.state = { checked: false };
+    constructor(props) {
+      super(props);
+      this.state = { checked: this.props.on};
       this.handleChange = this.handleChange.bind(this);
       
     }
-    handleChange(checked) {
-    this.setState({checked})
-    axios.post("http://localhost:3001",states).then((response)=>{Indicator["Bell"]=response.data["Bell"]; console.log(Indicator["Bell"]);})}
-  
+    handleChange(){
+      
+      this.state.checked ? this.setState({checked:false},function(){this.props.handleChange(this.state.checked,this.props.label);}) : this.setState({checked:true},function(){this.props.handleChange(this.state.checked,this.props.label);});
+      
+    }
     render() {
       return (
         <>
@@ -44,11 +48,9 @@ const Indicator={"Bell":"grey"}
     uncheckedIcon={false}
     checkedIcon={false}
     className="react-switch"
-    id="small-radius-switch"onChange={this.handleChange} checked={this.state.checked} />
+    id="small-radius-switch"onChange={() => this.handleChange()} checked={this.state.checked} />
         </div>
        
-       
-        {states[this.props.label]=this.state.checked}
         
         </>
       );
@@ -57,7 +59,35 @@ const Indicator={"Bell":"grey"}
  
 export default class Dashoard extends Component{
  
-    
+  constructor(props) {
+    super(props);
+    this.state = { 
+      data:{notification:{gaz:"haw famma gaz",temperature:"26 degre",mvt:"",bell:"Bell is ringing!"},Room1:false,Room2:true,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18}
+    };  
+  }
+  ///////////////////////////////////////////
+  componentDidMount(){
+    http.get('/dashboard')
+    .then(res => this.setState({data:res.data}))
+    .catch((err)=>console.log(err))
+  }  
+
+  handleChange = (checked,label) => {
+    let dataObj = {...this.state.data};
+    dataObj[label]=checked;
+    console.log("this is data to be passed",checked)
+    this.setState({data:dataObj})
+    console.log('this is data from switches',this.state.data)
+    axios.post("http://localhost:3001",this.state.data).then((response)=>{console.log("ll");})
+  }
+ 
+  changeVentilateur = (onVent) => {
+    let dataObj = {...this.state.data};
+    dataObj.ventilateur = onVent;
+    this.setState({data:dataObj});
+    console.log('this is data from ventilateur',onVent)
+  }
+   ////////////////////////////////////////////
     render(){
       
       return(
@@ -66,7 +96,7 @@ export default class Dashoard extends Component{
 <Row >
     <Col xl={12} lg={12} md={12} style={{marginBottom:"10px"}}>
         
-            <BlockNotification></BlockNotification>
+            <BlockNotification data={this.state.data.notification}></BlockNotification>
    </Col> 
     <Col xl={3} lg={3} md={12}>
     <Col xl={12} lg={12} md={12}>
@@ -74,20 +104,20 @@ export default class Dashoard extends Component{
             <CardHeader><h4>Lights</h4></CardHeader>
             <CardBody>
     
-    <SwitchExample label={"Room1"} light={true}></SwitchExample>
-    <SwitchExample label={"Room2"} light={true}></SwitchExample>
-    <SwitchExample label={"Room3"} light={true}></SwitchExample>
+    <SwitchExample label={"Room1"} light={true} on={this.state.data.Room1} handleChange={this.handleChange}></SwitchExample>
+    <SwitchExample label={"Room2"} light={true} on={this.state.data.Room2} handleChange={this.handleChange}></SwitchExample>
+    <SwitchExample label={"Room3"} light={true} on={this.state.data.Room3} handleChange={this.handleChange}></SwitchExample>
     </CardBody></Card></Col>
     <Col xl={12} lg={12} md={12}>
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader><h4>Security</h4></CardHeader>
             <CardBody>
                 
-                <SwitchExample label={"Alert"} ></SwitchExample>
-                <SwitchExample label={"Door"}></SwitchExample>
+                <SwitchExample label={"Alert"} on={this.state.data.Alert} handleChange={this.handleChange} ></SwitchExample>
+                <SwitchExample label={"Door"} on={this.state.data.Door} handleChange={this.handleChange}></SwitchExample>
                  <div>
                  <h4>Bell </h4>
-                <Bulb size={20} color={Indicator['Bell']}></Bulb>
+                <Bulb size={20} color={this.state.data.Bell ? "green" : "grey"}></Bulb>
                 </div>
                 
                 
@@ -118,7 +148,7 @@ export default class Dashoard extends Component{
     <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader><h4>Climat controls</h4></CardHeader>
             <CardBody>
-      <ControlClima/>
+      <ControlClima temp={this.state.data.temperature} onVent={this.state.data.ventilateur} handleChange={this.changeVentilateur} />
             </CardBody>
         </Card>
       </Col>
