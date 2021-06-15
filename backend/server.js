@@ -40,7 +40,7 @@ var topicSub="iot-2/type/esp2/id/dev02/evt/event2/fmt/json";
 var topicPub1="iot-2/type/esp1/id/dev01/cmd/command1/fmt/json";
 var topicPub2="iot-2/type/esp2/id/dev02/cmd/command2/fmt/json";
 var topicPub3="iot-2/type/rasp/id/dev03/cmd/command3/fmt/json";
-var indicators={data:{notification:{gaz:"haw famma gaz",temperature:"26 Degree",mvt:"",bell:"Bell is ringing!"},Room1:false,Room2:true,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18,OutDoor:false}}
+var indicators={data:{notification:{gaz:"mafammech gaz",temperature:" mayhyech 26 Degree",mvt:"",bell:"hubbaa!"},Room1:true,Room2:true,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18,OutDoor:false}}
 exports.indicators=indicators;
 var client  = mqtt.connect(options.host, options)
 var data =Dashboard.commands;
@@ -87,14 +87,13 @@ function subscribe(topicSub,options)
     
   }
 }
-client.subscribe(topicSub,{qos:1});
-var timer_id=setInterval(function(){
+/*client.subscribe(topicSub,{qos:0});*/
+/*var timer_id=setInterval(function(){
   publish(topicPub2,data,options);
   console.log("---------publish-----------");
-  console.log(data);
+  console.log(Dashboard);
   console.log("---------publish done-----------");
-  
- },5000);
+ },5000);*/
 
 
 

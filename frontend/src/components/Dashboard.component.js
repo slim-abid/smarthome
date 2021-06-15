@@ -3,7 +3,7 @@ import BlockTemperature from './BlockTemperature'
 import BlockNotification from './BlockNotification' 
 import MusicPlayer from './MusicPlayer'
 import ControlClima from './ControlClima'
-import 'semantic-ui-css/semantic.min.css'
+//import 'semantic-ui-css/semantic.min.css'
 import { AiFillBulb } from 'react-icons/ai';
 import axios from 'axios'
 import { Row, Col, Card, CardHeader, CardBody,  Button,ButtonGroup,Container} from 'reactstrap';
@@ -57,28 +57,30 @@ import http from './http-common'
     }
   }
  
-export default class Dashoard extends Component{
- 
+export default class Dashoard extends Component  {  
+
   constructor(props) {
     super(props);
     this.state = { 
-      data:{notification:{gaz:"haw famma gaz",temperature:"26 Degree",mvt:"",bell:"Bell is ringing!"},Room1:false,Room2:true,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18}
+      data:{notification:{gaz:"haw famma gaz",temperature:"26 Degree",mvt:"",bell:"Bell is ringing!"},Room1:false,Room2:false,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18,"OutDoor":false}
     };  
   }
-  ///////////////////////////////////////////
+
   componentDidMount(){
     http.get('/dashboard')
-    .then(res => this.setState({data:res.data}))
+    .then(res => this.setState({data:{... res.data.data}}))
     .catch((err)=>console.log(err))
   }  
 
   handleChange = (checked,label) => {
-    let dataObj = {...this.state.data};
+    if (label)
+    {
+      let dataObj = {...this.state.data};
     dataObj[label]=checked;
     console.log("this is data to be passed",checked)
     this.setState({data:dataObj})
     console.log('this is data from switches',this.state.data)
-    http.post('switch/',{label:checked})
+    http.post('/switch',{[label]:checked})
         .then(res => {
           if (res.status === 200) {
             console.log('switcher sent succesfully')
@@ -88,18 +90,22 @@ export default class Dashoard extends Component{
           }
         })
         .catch(err => {
-          console.log('error and data are ',{label:checked})
+          console.log('error and data are ',{[label]:checked})
           console.error(err);
           
         });
+    }
+    
   }
  
   changeVentilateur = (onVent) => {
-    let dataObj = {...this.state.data};
+    if(onVent)
+    {
+      let dataObj = {...this.state.data};
     dataObj.ventilateur = onVent;
     this.setState({data:dataObj});
     console.log('this is data from ventilateur',onVent)
-    http.post('ventilateur/',{ventilateur:onVent})
+    http.post('/ventilateur',{ventilateur:onVent})
         .then(res => {
           if (res.status === 200) {
             console.log('ventilateur sent succesfully')
@@ -113,13 +119,15 @@ export default class Dashoard extends Component{
           console.error(err);
           
         });
+    }
+    
   }
-   ////////////////////////////////////////////
+ 
     render(){
       
       return(
 
-<Container>
+<Container onClick={this.handleUpdate}>
 <Row >
     <Col xl={12} lg={12} md={12} style={{marginBottom:"10px"}}>
         
@@ -141,6 +149,7 @@ export default class Dashoard extends Component{
             <CardBody>
                 
                 <SwitchExample label={"Alert"} on={this.state.data.Alert} handleChange={this.handleChange} ></SwitchExample>
+                <SwitchExample label={"OutDoor"} on={this.state.data.OutDoor} handleChange={this.handleChange} ></SwitchExample>
                 <SwitchExample label={"Door"} on={this.state.data.Door} handleChange={this.handleChange}></SwitchExample>
                  <div>
                  <h4>Bell </h4>
@@ -148,9 +157,10 @@ export default class Dashoard extends Component{
                 </div>
                 
                 
-            </CardBody></Card>
-            </Col>
-      </Col>
+            </CardBody></Card></Col></Col>
+ 
+   
+ 
     
     <Col xl={5} lg={5} md={12}>
       <Col xl={12} lg={12} md={12} >
@@ -189,6 +199,8 @@ export default class Dashoard extends Component{
     </Col>
 
     </Col>
+    
+   
 
  
     
