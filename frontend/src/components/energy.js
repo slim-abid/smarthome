@@ -86,20 +86,20 @@ export const SolarEnergyGenerated = () => {
         return(
             <div className='Advice' style={{borderRadius:"10px"}}>
                 <div className='Advice1'>
-                    <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
-                    <h5 style={{marginTop:"10px"}}>bla bla bla advice</h5>
+                    <div ><Tick className='Tick' style={{height:"100%",width:"100%"}}></Tick> <h5 >bla bla bla advice</h5></div>
+                    
                 </div>
                 <div className='Advice1'>
-                    <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
-                    <h5 style={{marginTop:"10px"}}>bla bla bla advice</h5>
+                    <div><Tick className='Tick' style={{height:"100%",width:"100%"}}></Tick> <h5 >bla bla bla advice</h5></div>
+                    
                 </div>
                 <div className='Advice1'>
-                    <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
-                    <h5 style={{marginTop:"10px"}}>bla bla bla advice</h5>
+                    <div><Tick className='Tick' style={{height:"100%",width:"100%"}}></Tick> <h5 >bla bla bla advice</h5></div>
+                    
                 </div>
                 <div className='Advice1'>
-                    <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
-                    <h5 style={{marginTop:"10px"}}>bla bla bla advice</h5>
+                    <div><Tick className='Tick' style={{height:"100%",width:"100%"}}></Tick> <h5 >bla bla bla advice</h5></div>
+                    
                 </div>
             </div>
         )};
@@ -108,20 +108,20 @@ export const SolarEnergyGenerated = () => {
             return(
                 <div className='Advice'>
                     <div className='Advice1'>
-                        <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
-                        <h5 style={{marginTop:"10px",marginBottom:"0px"}}>Analysis 1</h5>
+                        <div><Tick className='Tick' style={{height:"100%",width:"100%"}}></Tick>  <h5 >Analysis 1</h5></div>
+                       
                     </div>
                     <div className='Advice1'>
-                        <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
-                        <h5 style={{marginTop:"10px"}}>Analysis 1</h5>
+                        <div><Tick className='Tick' style={{height:"100%",width:"100%"}}></Tick> <h5 >Analysis 1</h5></div>
+                        
                     </div>
                     <div className='Advice1'>
-                        <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
-                        <h5 style={{marginTop:"10px"}}>Analysis 1</h5>
+                        <div><Tick className='Tick' style={{height:"100%",width:"100%"}}></Tick> <h5 >Analysis 1</h5></div>
+                        
                     </div>
                     <div className='Advice1'>
-                        <div><Tick className='Tick' style={{height:"500%",width:"100%"}}></Tick></div>
-                        <h5 style={{marginTop:"10px"}}>Analysis 1</h5>
+                        <div><Tick className='Tick' style={{height:"100%",width:"100%"}}></Tick> <h5 >Analysis 1</h5></div>
+                        
                     </div>
                 </div>
             )};

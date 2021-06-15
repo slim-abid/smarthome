@@ -81,9 +81,10 @@ label{
   display:flex;
   flex-direction:row ; 
   justify-content:flex-start ; 
-  height:20px;
+  height:78px;
   padding-bottom:15px;
-  margin-bottom:15px;
+  margin-bottom:25px;
+  margin:auto;
    
 }
 
