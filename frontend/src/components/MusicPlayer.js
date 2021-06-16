@@ -48,7 +48,7 @@ function MusicPlayer() {
 
   return (
     <div >
-      {console.log("current song index",currentSongIndex)}
+     
       <Player 
         currentSongIndex={currentSongIndex} 
         setCurrentSongIndex={setCurrentSongIndex} 

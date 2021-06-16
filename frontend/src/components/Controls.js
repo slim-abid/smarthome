@@ -5,8 +5,8 @@ import http from './http-common'
 
 function Controls(props) {
 
-    const sendData = () => {
-        
+    const sendData = (e) => {
+        e.preventDefault();
         http.post('music/',props.isPlaying ? -1 : props.currentSongIndex)
         .then(res => {
           if (res.status === 200) {
@@ -29,7 +29,7 @@ function Controls(props) {
             <button className="skip-btn" onClick={() => props.SkipSong(false)}>
                 <FontAwesomeIcon icon={faBackward} />
             </button>
-            <button className="play-btn" style={{backgroundColor:"#1CADD4"}} onClick={() => sendData()}>
+            <button className="play-btn" style={{backgroundColor:"#1CADD4"}} onClick={(e) => sendData(e)}>
                 <FontAwesomeIcon icon={props.isPlaying ? faPause : faPlay} style={{margin:"auto"}} />
             </button>
             <button className="skip-btn" onClick={() => props.SkipSong()}>

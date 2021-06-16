@@ -23,13 +23,14 @@ import http from './http-common'
   class SwitchExample extends Component  {
     constructor(props) {
       super(props);
-      this.state = { checked: this.props.on};
+    
       this.handleChange = this.handleChange.bind(this);
-      
+      var checkedSet = this.props.on;
     }
+   
     handleChange(){
       
-      this.state.checked ? this.setState({checked:false},function(){this.props.handleChange(this.state.checked,this.props.label);}) : this.setState({checked:true},function(){this.props.handleChange(this.state.checked,this.props.label);});
+      this.props.on ? this.props.handleChange(false,this.props.label) :  this.props.handleChange(true,this.props.label);
       
     }
     render() {
@@ -48,7 +49,7 @@ import http from './http-common'
     uncheckedIcon={false}
     checkedIcon={false}
     className="react-switch"
-    id="small-radius-switch"onChange={() => this.handleChange()} checked={this.state.checked} />
+    id="small-radius-switch"onChange={() => this.handleChange()} checked={this.props.on} />
         </div>
        
         
@@ -62,15 +63,28 @@ export default class Dashoard extends Component  {
   constructor(props) {
     super(props);
     this.state = { 
+      
       data:{notification:{gaz:"haw famma gaz",temperature:"26 Degree",mvt:"",bell:"Bell is ringing!"},Room1:false,Room2:false,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18,"OutDoor":false}
-    };  
+    }; 
+    var intervalId = null;
+   
   }
 
   componentDidMount(){
+    this.getData();
+   this.intervalId  = setInterval(() => this.getData(), 2000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalId)
+    this.intervalId = null;
+  } 
+   getData = () =>{
     http.get('/dashboard')
-    .then(res => this.setState({data:{... res.data.data}}))
+    .then(res => this.setState({data:res.data.data}))
     .catch((err)=>console.log(err))
-  }  
+    
+
+  } 
 
   handleChange = (checked,label) => {
     if (label)
@@ -99,8 +113,7 @@ export default class Dashoard extends Component  {
   }
  
   changeVentilateur = (onVent) => {
-    if(onVent)
-    {
+
       let dataObj = {...this.state.data};
     dataObj.ventilateur = onVent;
     this.setState({data:dataObj});
@@ -119,7 +132,6 @@ export default class Dashoard extends Component  {
           console.error(err);
           
         });
-    }
     
   }
  
@@ -139,7 +151,7 @@ export default class Dashoard extends Component  {
             <CardHeader><h4>Lights</h4></CardHeader>
             <CardBody>
     
-    <SwitchExample label={"Room1"} light={true} on={this.state.data.Room1} handleChange={this.handleChange}></SwitchExample>
+    <SwitchExample label={"Room1"} light={true} on={this.state.data.Room1 ? true : false} handleChange={this.handleChange}></SwitchExample>
     <SwitchExample label={"Room2"} light={true} on={this.state.data.Room2} handleChange={this.handleChange}></SwitchExample>
     <SwitchExample label={"Room3"} light={true} on={this.state.data.Room3} handleChange={this.handleChange}></SwitchExample>
     </CardBody></Card></Col>
