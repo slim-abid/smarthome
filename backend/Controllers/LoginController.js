@@ -33,3 +33,13 @@ module.exports.login_post=async(request,response)=>
         console.log('connected');*/
     } catch (error) {response.status(404).send(error)}
 }
+module.exports.logout_get=async(request,response)=>
+{ 
+    try 
+    { 
+        console.log(user,'disconnected');
+        response.cookie('auth', '', { httpOnly: true }).sendStatus(200)
+        /*response.sendStatus(200)
+        console.log('connected');*/
+    } catch (error) {response.status(404).send(error)}
+}
