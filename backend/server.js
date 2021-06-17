@@ -6,16 +6,21 @@ const mongoose=require("mongoose")
 const authRoute=require('./Routes/Route')
 const URL2="mongodb+srv://User2:1234User2@application1cluster.kqjgt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const URL1="mongodb+srv://User1:1234User1@application1cluster.kqjgt.mongodb.net/LoginTest?retryWrites=true&w=majority"
-const cors =require('cors')
 const { Callbacks } = require("jquery")
-
+const { auth } = require('./Controllers/auth')
+const cors = require("cors");
+const cookieParser = require('cookie-parser');
 
 const app=express();
-
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 //middlewares
 app.use(express.json());
-app.use(cors())
 app.use(authRoute) 
+app.use(cookieParser());
+
 module.exports=[] 
 //Connect to the database
 mongoose.connect(URL1,{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex:true})
@@ -92,7 +97,11 @@ function subscribe(topicSub,options)
 }
 client.subscribe(topicSub1,{qos:0});
 client.subscribe(topicSub2,{qos:0});
+app.get('/login',auth,  (req, res) => {
 
+  res.sendStatus(200);
+
+})
 ////////////////////////////////////////////////////////////////
 /* video streaming method */
 ////////////////////////////////////////////////////////////////
