@@ -12,16 +12,11 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-module.exports.login_get=(request,response)=>{   
-    let token = request.cookies.auth;
-    User.findByToken(token,(err,user)=>{
-        if (err) throw err;
-        
-        if(!user) {  return response.status(401).send('no access');}
-        
-      
+module.exports.login_get=(request,response)=>{ 
+    
+   
         response.sendStatus(200);
-    })
+ 
     }
 
 module.exports.login_post=async(request,response)=>
