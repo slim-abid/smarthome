@@ -7,12 +7,22 @@ import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import http from "./http-common";
 
+
+
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
 
-
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
   contact:{
@@ -107,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
     width:'40%',
      backgroundColor:'#D6E1DB',
-    /* [theme.breakpoints.up('md')]: {
+     [theme.breakpoints.up('md')]: {
       width:400,
     },
     [theme.breakpoints.up('lg')]: {
@@ -118,12 +128,12 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up('sm')]: {
       width:400,
-    },*/
+    },
   },
     
     
   }));
-function Home() {
+function Home(props) {
 
     const classes = useStyles();
     const [username,setUsername] = React.useState('');
@@ -139,7 +149,26 @@ function Home() {
     });
   
     
+    const handleChangeP = (prop) => (event) => {
+      setValues({ ...values, [prop]: event.target.value });
+      setPassword(event.target.value);
+    };
   
+    const handleClickShowPassword = (event) => {
+      setValues({ ...values, showPassword: !values.showPassword });
+      
+    };
+  
+    const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+    };
+    ////////
+
+
+    const onChangePassword = (event) => {
+      setPassword(event.target.value);
+    }
+
     
   
    
@@ -168,6 +197,7 @@ function Home() {
       if (res.status === 200) {
        console.log('done succesfully!')
        handleClose();
+       props.onAuthenticated(true);
       } else { 
         console.log('response status is ',res.status)
          
@@ -181,7 +211,7 @@ function Home() {
       alert('Error logging in please try again');
     });
       }
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+ 
    
   
    
@@ -223,7 +253,7 @@ function Home() {
             
             <div className={classes.buttonDiv}>
             <Typography variant="subtitle1" className={classes.text} display="block" >
-            On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même. 
+            Home is where the comfort is. The real comfort lies in living smart and simple! 
             </Typography>
             <Button variant="outlined" className={classes.loginButton}  size="large" onClick={handleOpen} color="primary">
               Login
@@ -242,10 +272,45 @@ function Home() {
         }}
       >
         <Fade in={open}>
-          
-          
-       
-
+        <Container maxWidth="md" className={classes.paper}>
+          <div  >
+              <form className={classes.form} onSubmit={onSubmitHandler}>
+                <Toolbar>
+                  <TextField onChange={onChangeUsername} id="standard-basic1" label="Username" name="Username" margin="normal" fullWidth={true} required={true} />
+                </Toolbar>
+                <Toolbar>
+                <FormControl fullWidth={true}
+                            required={true}>
+                            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                            <Input
+                            fullWidth={true}
+                            required={true}
+                              id="standard-adornment-password"
+                              type={values.showPassword ? 'text' : 'password'}
+                              value={values.password}
+                              onChange={handleChangeP('password')}
+                              endAdornment={
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                  >
+                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                  </IconButton>
+                                </InputAdornment>
+                              }
+                            />
+                            </FormControl>
+                </Toolbar>
+                <Box display="flex" justifyContent="center" m={1} p={1} >
+                  <Button type="submit" fullWidth={true} className={classes.loginButton} variant="contained" color="primary" disableElevation>
+                    Log in
+                  </Button>
+                </Box>
+            </form>
+          </div>
+          </Container>
         </Fade>
       </Modal>
         </div>

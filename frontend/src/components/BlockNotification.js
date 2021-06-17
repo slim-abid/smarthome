@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
    
   },
 }));
-const data = {notification:{gaz:"haw famma gaz",temperature:"26 degre",mvt:"",bell:""}};
+const data = {notification:{gaz:"haw famma gaz",temp:"26 degre",mvt:"",bell:""}};
 export default function Notification(props) {
   const [openT, setOpenT ] = React.useState(true);
   const [openG, setOpenG ] = React.useState(true);
@@ -119,7 +119,7 @@ export default function Notification(props) {
   return (
     <div >
        
-         {props.data.temperature? <TemperatureNotification dataFromParent={props.data.temperature}></TemperatureNotification> : null } 
+         {props.data.temp? <TemperatureNotification dataFromParent={props.data.temp}></TemperatureNotification> : null } 
          {props.data.gaz? <GazNotification dataFromParent={props.data.gaz}></GazNotification> : null } 
          {props.data.mvt? <MVTNotification dataFromParent={props.data.mvt}></MVTNotification> : null } 
          {props.data.bell? <BellNotification dataFromParent={props.data.bell}></BellNotification> : null } 

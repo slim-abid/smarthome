@@ -10,10 +10,12 @@ module.exports.login_post=async(request,response)=>
 
     const {email,password}=request.body;
     try 
-    {
+    {   
         const user=await User.login(email,password);
         response.send(user._id)
         console.log(user,'connected');
        
+        /*response.sendStatus(200)
+        console.log('connected');*/
     } catch (error) {response.status(404).send(error)}
 }

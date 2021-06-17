@@ -64,7 +64,7 @@ export default class Dashoard extends Component  {
     super(props);
     this.state = { 
       
-      data:{notification:{gaz:"haw famma gaz",temperature:"26 Degree",mvt:"",bell:"Bell is ringing!"},Room1:false,Room2:false,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18,"OutDoor":false}
+      data:{notification:{gaz:"",temp:"",mvt:"",bell:""},Room1:false,Room2:false,Room3:false,Alert:false,Door:false,Bell:false,ventilateur:false,temperature:18,"OutDoor":false}
     }; 
     var intervalId = null;
    
@@ -72,7 +72,7 @@ export default class Dashoard extends Component  {
 
   componentDidMount(){
     this.getData();
-   this.intervalId  = setInterval(() => this.getData(), 2000);
+   this.intervalId  = setInterval(() => this.getData(), 1000);
   }
   componentWillUnmount() {
     clearInterval(this.intervalId)
@@ -113,11 +113,9 @@ export default class Dashoard extends Component  {
   }
  
   changeVentilateur = (onVent) => {
-
       let dataObj = {...this.state.data};
     dataObj.ventilateur = onVent;
     this.setState({data:dataObj});
-    console.log('this is data from ventilateur',onVent)
     http.post('/ventilateur',{ventilateur:onVent})
         .then(res => {
           if (res.status === 200) {
@@ -179,7 +177,11 @@ export default class Dashoard extends Component  {
       <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader><h4>Total energy consumption [kW]</h4> </CardHeader>
             <CardBody>
-                <Line data={TotalEnergyConsumption({ fill: false })} />
+                <Line options={{
+    animation: {
+        duration: 0
+    }
+}} data={TotalEnergyConsumption({ fill: false })} />
             </CardBody>
         </Card>
       </Col>
@@ -223,7 +225,11 @@ export default class Dashoard extends Component  {
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader><h4>Devices consumption</h4></CardHeader>
             <CardBody style={{width:"50%", margin:"auto"}}>
-            <Pie height={100} width={100} data={DevicesConsumption()} />
+            <Pie options={{
+    animation: {
+        duration: 0
+    }
+}} height={100} width={100} data={DevicesConsumption()} />
             </CardBody>
         </Card>
     </Col>
@@ -231,7 +237,11 @@ export default class Dashoard extends Component  {
         <Card className="card text-white mb-3" style={{backgroundColor:"#18213D",boxShadow:"3px 1px 20px 5px black",borderRadius:"10px" }}>
             <CardHeader><h4>Solar Energy generated</h4></CardHeader>
             <CardBody style={{width:"50%", margin:"auto"}}>
-                <Pie data={SolarEnergyGenerated()} />
+                <Pie options={{
+    animation: {
+        duration: 0
+    }
+}} data={SolarEnergyGenerated()} />
             </CardBody>
         </Card>
     </Col>

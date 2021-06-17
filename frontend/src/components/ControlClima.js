@@ -12,8 +12,7 @@ class ControlClima extends React.Component{
     activatevent = (e) =>
     {
       e.preventDefault();
-      
-        this.props.onVent ? this.props.handleChange(true) : this.props.handleChange(false); 
+        this.props.onVent ? this.props.handleChange(false) : this.props.handleChange(true); 
         
     }
      

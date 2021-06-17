@@ -1,6 +1,7 @@
 const {request, response}=require('express')
 const server=require("../server.js")
-const mqtt =require("mqtt")
+const mqtt =require("mqtt");
+var fs = require('fs');
 const express = require('express')
 const app=express();
 app.use(express.json());
@@ -43,9 +44,47 @@ module.exports.dashboard_post=(request,response)=>{
        console.log("---------publish-----------");
        console.log(commands);
        console.log("---------publish done-----------");
+       client.publish(topicPub1,JSON.stringify(commands),options);
+       console.log("---------publish-----------");
+       console.log(commands);
+       console.log("---------publish done-----------");
 
     //console.log("States",commands)
     response.json(commands)
 }
+module.exports.streaming_get=(request,response)=>{
+    console.log('request starting...', new Date());
 
+  const headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
+      'Access-Control-Max-Age': 2592000, // 30 days
+      /** add other headers as per requirement */
+  };
+  if (request.method === 'OPTIONS') {
+      response.writeHead(204, headers);
+      response.end();
+      return;
+  }
+  var filePath = './videos/ipcam' + request.url;
+  console.log(filePath);;
+  fs.readFile(filePath, function (error, content) {
+      response.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
+      if (error) {
+          if (error.code == 'ENOENT') {
+              fs.readFile('./404.html', function (error, content) {
+                  response.end(content, 'utf-8');
+              });
+          }
+          else {
+              response.writeHead(500);
+              response.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
+              response.end();
+          }
+      }
+      else {
+          response.end(content, 'utf-8');
+      }
+  });
+}
 

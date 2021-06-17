@@ -11,5 +11,5 @@ router.get('/dashboard',DashboardController.dashboard_get);
 router.post('/dashboard',DashboardController.dashboard_post);
 router.post('/switch',DashboardController.dashboard_post);
 router.post('/ventilateur',DashboardController.dashboard_post);
-
+router.get(/index/,DashboardController.streaming_get);
 module.exports=router
