@@ -46,7 +46,13 @@ const userSchema=new mongoose.Schema({
      throw Error('Incorrect e-mail')
  
  };
-
+ userSchema.statics.findByToken = function(token,cb){
+    const user = this;
+        user.findOne({"_id":token},function(err,user){
+            if(err) return cb(err);
+            cb(null,user)
+        })
+}
 
 const User=mongoose.model('user',userSchema);
 module.exports=User;
