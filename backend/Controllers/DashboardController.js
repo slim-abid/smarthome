@@ -41,13 +41,7 @@ module.exports.dashboard_post=(request,response)=>{
        }}
        
        client.publish(topicPub2,JSON.stringify(commands),options);
-       console.log("---------publish-----------");
-       console.log(commands);
-       console.log("---------publish done-----------");
        client.publish(topicPub1,JSON.stringify(commands),options);
-       console.log("---------publish-----------");
-       console.log(commands);
-       console.log("---------publish done-----------");
        client.publish(topicPub3,JSON.stringify(commands),options);
        console.log("---------publish-----------");
        console.log(commands);

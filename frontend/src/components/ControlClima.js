@@ -28,7 +28,7 @@ class ControlClima extends React.Component{
         <div className={"temperature-display cold"}  >{this.props.temp}°C</div>
      </div>
        <div className='button-container mt-1'>
-         <button onClick={(e)=>this.activatevent(e) }>{this.props.onVent ? "ON" : "OFF" }</button>
+         <button onClick={(e)=>this.activatevent(e) }>{this.props.onVent ? "OFF" : "ON" }</button>
          
        </div>
 </div>
