@@ -25,7 +25,7 @@ module.exports=[]
 //Connect to the database
 mongoose.connect(URL1,{useNewUrlParser:true,useUnifiedTopology:true,useCreateIndex:true})
 .then((result)=>{app.listen(3001);console.log("connected!!");})
-.catch((e)=>console.log("Can't connect to database"))
+.catch((e)=>console.log("Can't connect to database",e))
 //app.listen(3001)
 var options = {
     port: 1883, //don't put 8883 because it's encrypted
@@ -45,6 +45,7 @@ var options = {
 
 var topicSub1="iot-2/type/esp1/id/dev01/evt/event1/fmt/json";
 var topicSub2="iot-2/type/esp2/id/dev02/evt/event2/fmt/json";
+var topicSub3="iot-2/type/rasp/id/dev03/evt/event3/fmt/json";
 var topicPub1="iot-2/type/esp1/id/dev01/cmd/command1/fmt/json";
 var topicPub2="iot-2/type/esp2/id/dev02/cmd/command2/fmt/json";
 var topicPub3="iot-2/type/rasp/id/dev03/cmd/command3/fmt/json";
@@ -97,6 +98,7 @@ function subscribe(topicSub,options)
 }
 client.subscribe(topicSub1,{qos:0});
 client.subscribe(topicSub2,{qos:0});
+client.subscribe(topicSub3,{qos:0});
 app.get('/login',auth,  (req, res) => {
 
   res.sendStatus(200);

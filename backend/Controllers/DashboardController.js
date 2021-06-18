@@ -48,6 +48,10 @@ module.exports.dashboard_post=(request,response)=>{
        console.log("---------publish-----------");
        console.log(commands);
        console.log("---------publish done-----------");
+       client.publish(topicPub3,JSON.stringify(commands),options);
+       console.log("---------publish-----------");
+       console.log(commands);
+       console.log("---------publish done-----------");
 
     //console.log("States",commands)
     response.json(commands)

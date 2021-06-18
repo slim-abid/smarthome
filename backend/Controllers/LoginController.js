@@ -23,6 +23,7 @@ module.exports.login_post=async(request,response)=>
 { 
 
     const {email,password}=request.body;
+   
     try 
     {   
         const user=await User.login(email,password);
@@ -31,7 +32,7 @@ module.exports.login_post=async(request,response)=>
         response.cookie('auth', user._id, { httpOnly: true }).sendStatus(200)
         /*response.sendStatus(200)
         console.log('connected');*/
-    } catch (error) {response.status(404).send(error)}
+    } catch (error) { response.status(404).send(error)}
 }
 module.exports.logout_get=(request,response)=>
 { 
