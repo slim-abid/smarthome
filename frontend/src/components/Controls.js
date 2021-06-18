@@ -7,7 +7,7 @@ function Controls(props) {
 
     const sendData = (e) => {
         e.preventDefault();
-        http.post('music/',props.isPlaying ? -1 : props.currentSongIndex)
+        /*http.post('music/',props.isPlaying ? -1 : props.currentSongIndex)
         .then(res => {
           if (res.status === 200) {
             console.log('song index sent succesfully')
@@ -20,7 +20,7 @@ function Controls(props) {
           console.log('error and data are ',props.currentSongIndex)
           console.error(err);
           
-        });
+        });*/
      
     props.setIsPlaying(!props.isPlaying)
     }
