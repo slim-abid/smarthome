@@ -27,6 +27,7 @@ componentWillMount() {
 })
 .catch(err => {
   console.error(err);
+  this.setState({ isLoading: false });
 });
 
 }
